@@ -15,7 +15,8 @@ std::string transformChar( const char inputChar)
     }
 
     // Transliterate digits to English words
-    switch (inputChar) {
+    switch (inputChar) 
+    {
       case '0':
 	inputText += "ZERO";
 	break;
@@ -51,4 +52,4 @@ std::string transformChar( const char inputChar)
     // If the character isn't alphabetic or numeric, DONT add it.
     // Our ciphers can only operate on alphabetic characters.
  return inputText;
-	}
+}

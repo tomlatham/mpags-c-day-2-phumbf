@@ -20,6 +20,6 @@ endif()
 
 
 # - Declare the build of mpags-cipher main program
-add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/TransformChar.cpp MPAGSCipher/TransformChar.hpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/processCommandLine.cpp)
+add_executable(mpags-cipher mpags-cipher.cpp MPAGSCipher/TransformChar.cpp MPAGSCipher/TransformChar.hpp MPAGSCipher/processCommandLine.hpp MPAGSCipher/processCommandLine.cpp MPAGSCipher/runCaesarCipher.hpp MPAGSCipher/runCaesarCipher.cpp)
 target_include_directories(mpags-cipher PRIVATE MPAGSCipher)
 target_compile_features(mpags-cipher PRIVATE cxx_auto_type cxx_uniform_initialization cxx_binary_literals)
