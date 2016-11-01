@@ -4,7 +4,7 @@
 
 #include "processCommandLine.hpp"
 
-bool processCommandLine(const std::vector<std::string>& args, bool& helpRequested, bool& versionRequested, bool& encRequested, bool& decRequested, std::string& inputFileName, std::string& outputFileName, size_t& key)
+bool processCommandLine(const std::vector<std::string>& args, bool& helpRequested, bool& versionRequested, bool& encrypt, std::string& inputFileName, std::string& outputFileName, size_t& key)
 {
           
 
@@ -81,7 +81,7 @@ bool processCommandLine(const std::vector<std::string>& args, bool& helpRequeste
                  	else 
                 	 {
 	        	 //Got key, so assign value and advance past it
-	         	 key = std::stoul(args[i+1], nullptr, 0);
+	         	 key = std::stoul(args[i+1]);
                 	 //std::cout << key << std::endl;
 	        	 ++i;
                 	 }
@@ -90,13 +90,13 @@ bool processCommandLine(const std::vector<std::string>& args, bool& helpRequeste
                 else if (args[i] == "-encrypt") 
 		{
      		 //Activate encrypt mode
-	         encRequested = true;
+	         encrypt = true;
                 }
 
                 else if (args[i] == "-decrypt") 
 		{
-     		 //Activate encrypt mode
-	         decRequested = true;
+     		 //Activate decrypt mode
+	         encrypt = false;
                 }
 
 

@@ -23,8 +23,7 @@ int main(int argc, char* argv[])
   // Options that might be set by the command-line arguments
   bool helpRequested {false};
   bool versionRequested {false};
-  bool encRequested {false};
-  bool decRequested {false};
+  bool encrypt {true};
   std::string inputFileName {""};
   std::string outputFileName {""};
 
@@ -32,13 +31,13 @@ int main(int argc, char* argv[])
   size_t key{0};
   
   //Call process command line function and return true or false.
-  bool allok = processCommandLine(args, helpRequested, versionRequested, encRequested, decRequested, inputFileName, outputFileName, key);  
+  bool allok { processCommandLine(args, helpRequested, versionRequested, encrypt, inputFileName, outputFileName, key) };
 
   //If fails
   if(allok == false)
   {
-  std::cout << "Command line error" << std::endl;
-  return 1;
+    std::cout << "Command line error" << std::endl;
+    return 1;
   }
 
   // Handle help, if requested
@@ -55,7 +54,7 @@ int main(int argc, char* argv[])
       << "                   Stdin will be used if not supplied\n\n"
       << "  -o FILE          Write processed text to FILE\n"
       << "                   Stdout will be used if not supplied\n\n"
-      << "  -encrypt         Activate encryption mode\n\n"
+      << "  -encrypt         Activate encryption mode (the default)\n\n"
       << "  -decrypt         Activate decryption mode\n";
     // Help requires no further action, so return from main
     // with 0 used to indicate success
@@ -67,7 +66,7 @@ int main(int argc, char* argv[])
   // so return from main with zero to indicate success
   if (versionRequested) 
   {
-    std::cout << "0.1.0" << std::endl;
+    std::cout << "0.2.0" << std::endl;
     return 0;
   }
 
@@ -92,7 +91,7 @@ int main(int argc, char* argv[])
 
   // Loop over each character from user input if no input file exists
   // (until Return then CTRL-D (EOF) pressed)
-  if (inputFileName.empty())
+  else
   {
   	while(std::cin >> inputChar)
   	{
@@ -101,11 +100,7 @@ int main(int argc, char* argv[])
   }	
 
   //Define final output string "run" and set it to the result of the Caesar function
-  std::string run{""};
-  run += runCaesarCipher(inputText, key, encRequested, decRequested);
-  //Print both input and result
-  std::cout << inputText << std::endl;
-  std::cout << run << std::endl;
+  std::string run { runCaesarCipher(inputText, key, encrypt) };
 
   // Check that file is opened and if so write result to file
   if (!outputFileName.empty()) 
@@ -118,6 +113,12 @@ int main(int argc, char* argv[])
         }
 
       }
+  else
+  {
+    //Print result
+    //std::cout << inputText << std::endl;
+    std::cout << run << std::endl;
+  }
 
   // No requirement to return from main, but we do so for clarity
   // and for consistency with other functions
